@@ -6,28 +6,23 @@ pipeline {
         jdk "JDK"
     }
 
-    stages {
-        stage('Initialize'){
+    stages{
+        stage("checkout"){
             steps{
-                echo "PATH = ${M2_HOME}/bin:${PATH}"
-                echo "M2_HOME = /opt/maven"
+            echo 'getting source code from GIT'
+            git branch: 'main', url: 'https://github.com/wamansmit/my-app.git'
             }
-        }
-        stage('Build') {
-            steps {
-                dir("/var/lib/jenkins/workspace/New_demo/my-app/") {
-                sh 'mvn -B -DskipTests clean package'
-                }
+                
+            }
+        stage("build"){
+            steps{
+                withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'maven', mavenSettingsConfig: '', traceability: true) // in this pipeline add mvn env using syntax generator
+                {
+                 sh "mvn clean install"       // add secure shell command for maven it is also known as maven command block command        
+                          }
+            
+            echo 'building the application'
             
             }
-        }
-     }
-    post {
-       always {
-          junit(
-        allowEmptyResults: true,
-        testResults: '*/test-reports/.xml'
-      )
-      }
-   } 
-}
+            }
+    }        
