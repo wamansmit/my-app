@@ -12,9 +12,11 @@ pipeline {
             steps{
                 withMaven(globalMavenSettingsConfig: '', maven: 'maven') {
                  sh "mvn clean install"       // add secure shell command for maven it is also known as maven command block command        
-                          } 
-                
-        stage('Build Docker Image') {
+                          }
+            }
+        }
+        
+stage('Build Docker Image') {
             steps {
                 script {
                     // Build the Docker image
@@ -26,16 +28,15 @@ pipeline {
             }
         }
 
-        stage('Publish Docker Image') {
-            steps {
-                script {
-                    // Authenticate with a Docker registry (e.g., Docker Hub)
-                    docker.withRegistry(REGISTRY_CREDENTIALS) {
-                        // Push the Docker image to the registry
-                        dockerImage.push()
-                    }
-                }
-            }
-        }
+
+
+
+
+
+
+
+
+
+            
     }
 }
