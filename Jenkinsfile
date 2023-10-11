@@ -33,7 +33,7 @@ pipeline {
                 script {
                     tool name: 'docker', type: 'dockerTool'
                     // Build the Docker image
-                    sh "systemctl start docker"
+            
                     sh "docker build -t ${DOCKER_REGISTRY}/my-app:${APP_VERSION} ."
                 }
             }
