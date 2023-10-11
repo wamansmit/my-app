@@ -49,8 +49,6 @@ pipeline {
         }
     }
 
-            
-            echo 'building the application"
         
     }
 }
