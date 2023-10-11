@@ -48,7 +48,5 @@ pipeline {
             error('Docker image build or push failed!')
         }
     }
-
-        
-    }
-}
+            }
+        }
