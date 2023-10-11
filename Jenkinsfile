@@ -17,14 +17,14 @@ pipeline {
 
         stage('Build') {
             steps {
-                script {
+            
                     // Set up environment variables specific to the build
-                    MAVEN_HOME = tool name: 'maven', type: 'Maven'
-                  
-                    
-                    // Build the Maven project
+        withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'maven', mavenSettingsConfig: '', traceability: true) {
+     // Build the Maven project
                     sh "mvn clean install"
-                }
+}
+                  
+            
             }
         }
 
