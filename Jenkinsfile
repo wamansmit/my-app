@@ -14,12 +14,12 @@ pipeline {
                 checkout scm
             }
         }
-
+    
         stage('Build') {
             steps {
                 script {
                     // Add Docker to the PATH
-                    def dockerPath = tool name: 'Docker', type: 'Tool Type' // Replace 'Tool Type' with the actual tool type
+                    def dockerPath = tool name: 'docker', type: 'dockerTool' // Replace 'Tool Type' with the actual tool type
                     env.PATH = "${dockerPath}:${env.PATH}"
 
                     // Build the Docker image
