@@ -19,7 +19,6 @@ pipeline {
             steps { 
                 // Add Docker to the PATH
                     tool name: 'docker', type: 'dockerTool' // Replace 'Tool Type' with the actual tool type
-                    env.PATH = "${dockerPath}:${env.PATH}"
                     
                 script {
                    
