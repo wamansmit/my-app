@@ -46,21 +46,7 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
-            steps {
-                // Add deployment steps here, e.g., Kubernetes deployment, Docker Compose, etc.
-            }
-        }
-    }
-
-    post {
-        success {
-            // Add notifications or additional actions upon successful build and deployment
-        }
-
-        failure {
-            // Add actions in case of pipeline failure
-        }
+        
     }
 }
 
