@@ -16,11 +16,13 @@ pipeline {
         }
     
         stage('Build') {
-            steps {
-                script {
-                    // Add Docker to the PATH
+            steps { 
+                // Add Docker to the PATH
                     tool name: 'docker', type: 'dockerTool' // Replace 'Tool Type' with the actual tool type
                     env.PATH = "${dockerPath}:${env.PATH}"
+                    
+                script {
+                   
 
                     // Build the Docker image
                     sh "docker build -t ${DOCKER_REGISTRY}/my-app:${APP_VERSION} ."
