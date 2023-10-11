@@ -11,8 +11,7 @@ pipeline {
             }
         stage("build"){
             steps{
-                withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'maven', mavenSettingsConfig: '', traceability: true) // in this pipeline add mvn env using syntax generator
-                {
+                withMaven(globalMavenSettingsConfig: '', jdk: 'java', maven: 'maven', mavenSettingsConfig: '', traceability: true) {
                  sh "mvn clean install"       // add secure shell command for maven it is also known as maven command block command        
                           }
             
