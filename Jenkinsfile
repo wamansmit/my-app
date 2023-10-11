@@ -17,11 +17,12 @@ pipeline {
         }
 
         stage('Build with Maven') {
-                     withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'maven', mavenSettingsConfig: '', traceability: true) 
+                     withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'maven', mavenSettingsConfig: '', traceability: true) {
     steps {
                 // Build the Java project with Maven
                 sh 'mvn clean package'
             }
+        }
         }
         
         stage('Create Docker image') {
