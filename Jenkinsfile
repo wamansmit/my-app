@@ -5,8 +5,7 @@ pipeline {
         // Define environment variables here
         DOCKER_REGISTRY = 'https://hub.docker.com/'
         APP_VERSION = '1.0'
-    }
-
+        tool name: 'docker', type: 'dockerTool' // Replace 'Tool Type' with the actual tool type}
     stages {
         stage('Checkout') {
             steps {
@@ -17,12 +16,7 @@ pipeline {
     
         stage('Build') {
             steps { 
-                // Add Docker to the PATH
-                    tool name: 'docker', type: 'dockerTool' // Replace 'Tool Type' with the actual tool type
-                    
                 script {
-                   
-
                     // Build the Docker image
                     sh "docker build -t ${DOCKER_REGISTRY}/my-app:${APP_VERSION} ."
         }
