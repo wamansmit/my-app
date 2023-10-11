@@ -13,18 +13,47 @@ pipeline {
             steps{
                 withMaven(globalMavenSettingsConfig: '', maven: 'maven') {
                  sh "mvn clean install"       // add secure shell command for maven it is also known as maven command block command        
-                          }
+                          } 
+                
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build the Docker image
+                    dockerImage = docker.build(
+                        DOCKER_IMAGE_NAME,
+                        "--file ${DOCKERFILE_PATH} ."
+                    )
+                }
+            }
+        }
+
+        stage('Publish Docker Image') {
+            steps {
+                script {
+                    // Authenticate with a Docker registry (e.g., Docker Hub)
+                    docker.withRegistry(REGISTRY_CREDENTIALS) {
+                        // Push the Docker image to the registry
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Docker image build and push succeeded!'
+        }
+        failure {
+            error('Docker image build or push failed!')
+        }
+    }
+}
             
             echo 'building the application'
             
             }
             }
-        stage('Docker Build') {
-            steps {
-                script {
-                    docker.build("wamansmit/myapp:${TAG}")
-                }
-            }
-        }
+        
     }
 }
