@@ -1,28 +1,42 @@
 pipeline {
     agent any
 
-    environment {
-        // Define environment variables here
-        DOCKER_REGISTRY = 'https://hub.docker.com/'
-        APP_VERSION = '1.0'
-        tool_name = 'docker' 
-        type = 'dockerTool' // Replace 'Tool Type' with the actual tool type
-    }
     stages {
         stage('Checkout') {
             steps {
-                // Checkout your Git repository
-                checkout scm
+                // Check out the Git repository
+                git url: 'https://github.com/wamansmit/my-app.git'
             }
         }
-    
-        stage('Build') {
-            steps { 
+
+        stage('Build Docker Image') {
+            steps {
+                // Build the Docker image
                 script {
-                    // Build the Docker image
-                    sh "docker build -t ${DOCKER_REGISTRY}/my-app:${APP_VERSION} ."
+                    def customImageTag = "myapp:${env.BUILD_NUMBER}" // Customize the image tag
+                    docker.build(customImageTag, './Dockerfile') // Path to your Dockerfile
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                // Push the Docker image to a registry (e.g., Docker Hub)
+                script {
+                    docker.withRegistry('https://hub.docker.com', 'docker') {
+                        docker.image(customImageTag).push()
+                    }
+                }
+            }
         }
     }
-}
-}
+
+    post {
+        success {
+            // Perform actions when the build succeeds
+        }
+        failure {
+            // Perform actions when the build fails
+        }
+    }
 }
