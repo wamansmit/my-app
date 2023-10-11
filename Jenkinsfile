@@ -22,7 +22,7 @@ stage('Build Docker Image') {
                     // Build the Docker image
                     dockerImage = docker.build(
                         myapp:1,
-                        "--file ${} ."
+                        "--file ${Dockerfile} ."
                     )
                 }
             }
