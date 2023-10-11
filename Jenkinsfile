@@ -31,13 +31,13 @@ pipeline {
         script {
             // Add Docker to the PATH
             def dockerPath = tool name: 'docker', type: 'dockertool' // Replace 'Tool Type' with the actual tool type
-            env.PATH = "${dockerPath}:${env.PATH}"
+            env.PATH = "${dockerPath}:${env.PATH}"}
 
             // Build the Docker image
             sh "docker build -t ${DOCKER_REGISTRY}/my-app:${APP_VERSION} ."
         }
     }
-}
+
 
         }
 
