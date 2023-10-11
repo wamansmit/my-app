@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Define environment variables here
-        DOCKER_REGISTRY = 'docker.io'
+        DOCKER_REGISTRY = 'https://hub.docker.com/'
         APP_VERSION = '1.0'
     }
 
