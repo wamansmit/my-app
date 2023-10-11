@@ -30,13 +30,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        success {
-            // Perform actions when the build succeeds
-        }
-        failure {
-            // Perform actions when the build fails
-        }
-    }
 }
