@@ -38,7 +38,7 @@ pipeline {
                 }
             }
         }
-    }
+    
 
     post {
         success {
@@ -48,12 +48,9 @@ pipeline {
             error('Docker image build or push failed!')
         }
     }
-}
+
             
-            echo 'building the application'
-            
-            }
-            }
+            echo 'building the application"
         
     }
 }
