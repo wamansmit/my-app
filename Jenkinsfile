@@ -11,7 +11,7 @@ pipeline {
             }
         stage("build"){
             steps{
-                withMaven(globalMavenSettingsConfig: '', jdk: 'java', maven: 'maven', mavenSettingsConfig: '', traceability: true) {
+                withMaven(globalMavenSettingsConfig: '', maven: 'maven') {
                  sh "mvn clean install"       // add secure shell command for maven it is also known as maven command block command        
                           }
             
