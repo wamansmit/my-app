@@ -17,9 +17,9 @@ pipeline {
 
         stage('Build') {
             steps {
-            
+             maven: 'maven'
                     // Set up environment variables specific to the build
-        withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'maven', mavenSettingsConfig: '', traceability: true) {
+        
      // Build the Maven project
                     sh "mvn clean install"
 }
