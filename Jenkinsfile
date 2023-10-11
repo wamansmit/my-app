@@ -5,7 +5,7 @@ pipeline {
         // Define environment variables here
         DOCKER_REGISTRY = 'https://hub.docker.com/'
         APP_VERSION = '1.0'
-        tool name: 'docker', type: 'dockerTool' // Replace 'Tool Type' with the actual tool type
+        tool_name = 'docker', type ='dockerTool' // Replace 'Tool Type' with the actual tool type
     }
     stages {
         stage('Checkout') {
