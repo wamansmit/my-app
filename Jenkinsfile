@@ -19,5 +19,12 @@ pipeline {
             
             }
             }
+        stage('Docker Build') {
+            steps {
+                script {
+                    docker.build("wamansmit/myapp:${TAG}")
+                }
+            }
+        }
     }
 }
