@@ -2,6 +2,8 @@ pipeline {
     agent any
 
     environment {
+
+        
         // Define environment variables as needed
         DOCKER_IMAGE = 'my-java-app'
     }
@@ -15,12 +17,16 @@ pipeline {
         }
 
         stage('Build with Maven') {
+withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'maven', mavenSettingsConfig: '', traceability: true) {
+
+
+            
             steps {
                 // Build the Java project with Maven
                 sh 'mvn clean package'
             }
         }
-
+        }
         stage('Create Docker image') {
             steps {
                 // Build a Docker image using a Dockerfile
