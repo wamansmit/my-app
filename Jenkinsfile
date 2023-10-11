@@ -1,7 +1,6 @@
 pipeline {
     agent any
-
-    stages{
+        stages{
         stage("checkout"){
             steps{
             echo 'getting source code from GIT'
@@ -38,15 +37,5 @@ pipeline {
                 }
             }
         }
-    
-
-    post {
-        success {
-            echo 'Docker image build and push succeeded!'
-        }
-        failure {
-            error('Docker image build or push failed!')
-        }
-    }
             }
         }
