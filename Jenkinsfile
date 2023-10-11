@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Check out the Git repository
-              git git-url :"https://github.com/wamansmit/my-app.git"
+              git branch: 'main', url: 'https://github.com/wamansmit/my-app.git'
             }
         }
 
