@@ -21,8 +21,8 @@ stage('Build Docker Image') {
                 script {
                     // Build the Docker image
                     dockerImage = docker.build(
-                        DOCKER_IMAGE_NAME,
-                        "--file ${DOCKERFILE_PATH} ."
+                        myapp:1,
+                        "--file ${} ."
                     )
                 }
             }
