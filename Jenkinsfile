@@ -7,7 +7,7 @@ pipeline{
     stages{
         stage("SCM checkout"){
             steps{
-                git branch: 'main', credentialsId: 'gitHub', url: 'https://github.com/wamansmit/my-app.git'  
+                git branch: 'main', credentialsId: 'git', url: 'https://github.com/wamansmit/my-app.git'  
                 }
             }
         stage("Maven build"){
