@@ -12,9 +12,11 @@ pipeline {
         }
      
     stage('Node JS Build') {
-      steps {
-        sh 'mvn install package'
-      }
+      withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'maven', mavenSettingsConfig: '', traceability: true) {
+            sh 'mvn install package'
+
+}
+
     }
   
      stage('Build Node JS Docker Image') {
