@@ -9,6 +9,7 @@ pipeline {
     }
     stage('Build and Test') {
       steps {
+        (globalMavenSettingsConfig: '', jdk: '', maven: 'maven', mavenSettingsConfig: '', traceability: true)
         sh 'ls -ltr'
         // build the project and create a JAR file
         sh 'mvn clean install'
