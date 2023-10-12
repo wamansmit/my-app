@@ -13,8 +13,8 @@ pipeline {
      
     stage('Node JS Build') {
       withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'maven', mavenSettingsConfig: '', traceability: true) {
-            sh 'mvn install package'
-
+         steps{   sh 'mvn install package'
+              }
 }
 
     }
