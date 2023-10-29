@@ -1,43 +1,49 @@
 pipeline {
-  agent any
+    agent any // You can specify a node to run the pipeline if needed
 
-    
-  stages {
-    stage("Clone code from GitHub") {
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout code from the Git repository
+                git branch: 'main', url: 'https://github.com/wamansmit/my-app.git' // Replace with your Git repository URL
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Use Maven to build the project
+                sh 'mvn clean package' // You may need to adjust this command based on your Maven setup
+            }
+        }
+
+        stage('Copy Artifacts') {
+            steps {
+                // Copy built artifacts to a directory
+                sh 'cp -R target/* /workspace/' // Replace with your artifact destination directory
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                // Run tests (if applicable)
+                sh 'mvn test' // Example command for running Maven tests
+            }
+        }
+
+        stage('Build Docker Image') {
             steps {
                 script {
-                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'git', url: 'https://github.com/wamansmit/my-app.git']])
+                    // Build Docker image from the copied artifacts
+                    docker.build("your-image-name:${env.BUILD_NUMBER}") // Replace with your desired image name
                 }
             }
         }
-     
-    stage('Node JS Build') {
-      withMaven(globalMavenSettingsConfig: '', jdk: '', maven: 'maven', mavenSettingsConfig: '', traceability: true) {
-         steps{   sh 'mvn install package'
-              }
-}
 
+        stage('Deploy') {
+            steps {
+                // Here you can add deployment steps if required
+                // Example: Push the Docker image to a registry or deploy it to a container platform
+            }
+        }
     }
-  
-     stage('Build Node JS Docker Image') {
-            steps {
-                script {
-                  sh 'docker build -t wamansmit/my-app-1.0 .'
-                }
-            }
-        }
-
-
-        stage('Deploy Docker Image to DockerHub') {
-            steps {
-                script {
-                 withCredentials([string(credentialsId: 'docker', variable: 'docker')]) {
-                    sh 'docker login -u docker -p ${docker}'
-            }
-            sh 'docker push wamansmit/my-app-1.0'
-        }
-            }   
-        }
-
-  }
 }
