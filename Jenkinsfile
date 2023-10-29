@@ -34,16 +34,6 @@ pipeline {
             steps {
                 script {
                     // Build Docker image from the copied artifacts
-                    docker.build("your-image-name:${env.BUILD_NUMBER}") // Replace with your desired image name
-                }
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                // Here you can add deployment steps if required
-                // Example: Push the Docker image to a registry or deploy it to a container platform
-            }
-        }
+                    docker.build("your-image-name:${env.BUILD_NUMBER}") // Replace with your desir
     }
 }
